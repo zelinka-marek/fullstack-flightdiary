@@ -4,6 +4,7 @@ import {
   getNonSensitiveEntries,
   addDiary,
 } from "../services/diary";
+import { toNewDiaryEntry } from "../utils";
 
 export const diaryRouter = express.Router();
 
@@ -21,11 +22,17 @@ diaryRouter.get("/:id", (request, response) => {
 });
 
 diaryRouter.post("/", (request, response) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { date, weather, visibility, comment } = request.body;
+  try {
+    const newDiaryEntry = toNewDiaryEntry(request.body);
+    const addedEntry = addDiary(newDiaryEntry);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const addedEntry = addDiary({ date, weather, visibility, comment });
+    response.send(addedEntry);
+  } catch (error) {
+    let errorMessage = "Something went wrong.";
+    if (error instanceof Error) {
+      errorMessage += ` Error: ${error.message}`;
+    }
 
-  response.send(addedEntry);
+    response.status(400).send(errorMessage);
+  }
 });
