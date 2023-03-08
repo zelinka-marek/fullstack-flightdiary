@@ -16,6 +16,11 @@ export function getNonSensitiveEntries(): NonSensitiveDiaryEntry[] {
   );
 }
 
+export function findDiaryById(id: number): DiaryEntry | undefined {
+  const diary = diaries.find((diary) => diary.id === id);
+  return diary;
+}
+
 export function addDiary() {
   return null;
 }
