@@ -10,10 +10,10 @@ diaryRouter.get("/", (_request, response) => {
 diaryRouter.get("/:id", (request, response) => {
   const { id } = request.params;
 
-  const diary = findDiaryById(Number(id));
-  if (!diary) return response.sendStatus(404);
+  const entry = findDiaryById(Number(id));
+  if (!entry) return response.sendStatus(404);
 
-  response.send(diary);
+  response.send(entry);
 });
 
 diaryRouter.post("/", (_request, response) => {
