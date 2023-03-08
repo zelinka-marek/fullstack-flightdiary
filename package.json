@@ -1,5 +1,5 @@
 {
-  "name": "fullstack-flightdiary",
+  "name": "fullstack-flightdiary-backend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
