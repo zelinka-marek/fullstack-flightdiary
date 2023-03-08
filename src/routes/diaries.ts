@@ -4,9 +4,7 @@ import { getNonSensitiveEntries } from "../services/diary";
 export const diaryRouter = express.Router();
 
 diaryRouter.get("/", (_request, response) => {
-  const diaries = getNonSensitiveEntries();
-
-  response.json(diaries);
+  response.send(getNonSensitiveEntries());
 });
 
 diaryRouter.post("/", (_request, response) => {
